@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DataLayer.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index", "Category", FormMethod.Post))
+{
+    <div>
+
+        <p>
+            <b>Search Option: </b>
+            @Html.RadioButton("option", "Divison") Divion
+            @Html.RadioButton("option", "Region")  Region
+            @Html.RadioButton("option", "Supplier Id")Supplier Id
+            @Html.RadioButton("option", "Supplier Name")Supplier Name
+            @Html.RadioButton("option", "CategoryCode")Category Code
+
+            @Html.TextBox("search")
+            <input type="submit" name="submit" value="Search" />
+        </p>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Division)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+
+                    @Html.ActionLink(item.CategoryCode, "CategoryCodeEditor", "Category", new { id = item.CategoryCode }, null)
+
+
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Division)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "CategoryCodeEditor", new { id = item.CategoryCode }) |
+                    @Html.ActionLink("Details", "DetailsCategory", new { id = item.CategoryCode }) |
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+} 

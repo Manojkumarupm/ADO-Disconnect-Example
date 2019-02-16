@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DataLayer.Category>
+
+@{
+    ViewBag.Title = "GetCategoryDetails";
+    
+}
+
+<h2>GetCategoryDetails</h2>
+<meta name="viewport" content="width=device-width" />
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+<div>
+
+    <div class="code-cut">
+        @*@grid.GetHtml(columns: new[]
+           {
+           grid.Column("CategoryCode"),
+           grid.Column("CategoryName"),
+           grid.Column("Division"),
+           grid.Column("Region"),
+           grid.Column("SupplierId"),
+           grid.Column("SupplierName")
+           })*@
+       @Html.Grid(Model).Columns(columns =>
+                    {
+                        columns.Add(c => c.CategoryCode).Titled("CategoryCode");
+                        columns.Add(c => c.CategoryName).Titled("CategoryName").Filterable(true);
+                        columns.Add(c => c.Division).Titled("Division");
+                    }).WithPaging(3).Sortable(true)
+
+    </div>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
